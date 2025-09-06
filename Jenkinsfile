@@ -7,10 +7,10 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            steps {
-                echo "Checking out develop branch..."
-                checkout scm
-            }
+            checkout([$class: 'GitSCM',
+                    branches: [[name: '*/develop']],
+                    userRemoteConfigs: [[url: 'https://github.com/Arunindpro/NewRepo.git']]
+                ])
         }
 
         stage('Build') {
